@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes }  from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { QUERIES, WEIGHTS } from '../../constants';
@@ -13,7 +13,21 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
     <Dialog.Root open={isOpen} onOpenChange={onDismiss}>
       <Dialog.Portal>
         <Overlay />
-        <Content>
+        <Content style={{
+          transform: isOpen
+            ? 'translateX(0vh)'
+            : 'translateX(100vh)',
+          transition: 'transform',
+          transitionDuration: isOpen
+            ? '400ms'
+            : '250ms',
+          transitionDelay: isOpen
+            ? '250ms'
+            : '0ms',
+          transitionTimingFunction: isOpen
+            ? 'ease-out'
+            : 'ease-in',
+          }}>
           <CloseButton onClick={onDismiss}>
             <Icon id="close" />
             <VisuallyHidden>Dismiss menu</VisuallyHidden>
